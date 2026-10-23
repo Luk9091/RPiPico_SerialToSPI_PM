@@ -42,8 +42,9 @@ int main(){
     static repeating_timer_t timer;
     add_repeating_timer_ms(250, &blink_callback, NULL, &timer);
 
-
+    uint8_t data = 0xFF;
     while (1){
+        // spi_write_blocking(spi0, &data, 1);
         if (CLI_read()){
             CLI_execute();
         }

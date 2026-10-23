@@ -83,7 +83,10 @@ static int CLI_readSPI(){
     uint32_t readValues[512];
     SPI_read(address, readValues, size);
     for (size_t i = 0; i < size; i++){
-        printf("%03i: 0x%08X\n", i, readValues[i]);
+        if (address + i < 0xC0){
+            readValues[i] = readValues[i] & 0xFFFF;
+        }
+        printf("%03i: 0x%08X : %u\n", i, readValues[i], readValues[i]);
     }
     return 0;
 }
